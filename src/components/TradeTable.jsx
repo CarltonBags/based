@@ -15,10 +15,10 @@ export default function TradeTable({ buys, sells }) {
 
     return (
         <div className="w-full">
-            <div className="font-bold font-basic text-xl">
+            <div className="font-semibold font-basic text-xl">
                 traders
             </div>
-            <div className="max-w-[340px] sm:max-w-[600px] connectbox border-4 border-black bg-black font-basic overflow-x-auto">
+            <div className="max-w-[340px] sm:max-w-[600px] border-4 rounded-xl border-black bg-black font-basic overflow-x-auto shadow-xl shadow-base-22">
                 <div className="w-[420px] sm:w-full overflow-x-auto"> {/* Ensure the inner div is wide enough to force scrolling */}
                     <table className="w-full">
                         <thead>

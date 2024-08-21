@@ -18,7 +18,7 @@ export  function NavAccount ({handleOpen, isOpen}) {
 
     return (
 
-        <div onClick={handleClick} className="flex connectbox bg-base-6 border-4 border-black p-2 mb-4 hover:scale-110 ease-in-out hover:cursor-pointer w-12">
+        <div onClick={handleClick} className="flex bg-base-21 text-white justify-center h-10 rounded p-2 mb-4 hover:scale-110 ease-in-out hover:cursor-pointer w-12 shadow-lg shadow-base-22">
             me
         </div>
     )

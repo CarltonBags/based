@@ -22,14 +22,14 @@ export default function Comments ({item, latest}) {
     },[])
 
     return(
-        <div className="flex flex-col connectbox truncate text-wrap border-4 border-black text-xs font-basic mb-4 mr-4">
-            <div className="flex flex-row justify-between bg-base-7 px-2 gap-2 border-b-2 border-black">
+        <div className="flex flex-col truncate text-wrap border-2 border-base-22 rounded-xl text-xs font-basic mb-4 mr-4 shadow-md shadow-base-22">
+            <div className="flex flex-row justify-between bg-base-22 opacity-70 px-2 gap-2 border-b-2 border-base-22">
                     <div >
                         {nDate}
                     </div>
                     {holder &&
-                        <div className="font-basic text-xs font-bold text-base-2">
-                            ✅ holder
+                        <div className="font-basic text-xs font-bold ">
+                            ✅ buyer
                         </div>
                     }
                     <div>

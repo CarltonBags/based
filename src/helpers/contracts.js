@@ -9,7 +9,7 @@ export const contracts = {
     factory: 
         {
             addresses: {
-                97:'0xA9B3b651bc5FfE3a9783541ED16E70430958B470'
+                97:'0xA5D9059A277F599857e41bd34C5FF332Dabd1970'
             },
 
             interface: {
@@ -20,7 +20,7 @@ export const contracts = {
     eventhandler:
         {
             addresses:{
-                97:"0xAF3B1FF5C33C9D144300f7Eb9EFD9a044fF5Acb2"
+                97:"0x9eb55843b93F8cBd8dB7A5695eF581FDcc6E91c0"
             }
 
         },

@@ -15,7 +15,7 @@ function App() {
       <div className="pt-4">
         <Hero />
       </div>
-      <div className="pt-20">
+      <div className="pt-10">
         <LaunchTable />
       </div>
     </div>

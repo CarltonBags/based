@@ -83,7 +83,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
         if(value > 0){
             const parsed = ethers.utils.parseEther(stringValue)
             setParsedToken(parsed)
-            console.log("parsed", ethers.utils.formatEther(parsed))
+            //console.log("parsed", ethers.utils.formatEther(parsed))
         }
 
     }
@@ -96,7 +96,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
 
     if(!trading){
         return(
-        <div className="connectbox border-4 border-black bg-gray-400 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
+        <div className="rounded-xl border-2 bg-gray-400 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
             <SellModal className="z-10" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
             <form
                 name="buy"
@@ -112,11 +112,8 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                         
                         
                     </div>
-                </div>
-                
+                </div>   
             </div>
-            
-            
             <div className="flex flex-col bg-base-4 border-2 border-black">
                     <div className="flex flex-col bg-white px-2 py-2">
                     <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">sell amount (${tokenTicker})</label>
@@ -153,14 +150,14 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                     </div>
                 </div>
                 {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status =="Exception") &&
-                    <button className=" border-2 border-black connectbox bg-gray-200 font-basic px-4 mt-2"
+                    <button className=" border-2 rounded-xl bg-gray-200 font-basic px-4 mt-2"
                         disabled
                         >
                             sell
                     </button>
                 }
                 {(state.status == "PendingSignature" || state.status == "Mining") &&
-                    <button className="animate-pulse  border-2 border-black bg-base-11 font-basic px-4 mt-2">
+                    <button className="animate-pulse rounded-xl bg-base-22 font-basic px-4 mt-2">
                         selling...
                     </button>
                 }
@@ -171,7 +168,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
     }
 
     return(
-        <div className="connectbox border-4 border-black bg-base-3 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
+        <div className="border-2 border-base-22 rounded-xl bg-slate-50 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4 shadow-xl shadow-base-22">
             <SellModal className="z-10" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
             <form
                 name="buy"
@@ -184,7 +181,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                     </div>
                     <div className="flex flex-row items-center">
                         <div className="flex self-start">
-                            <label className="font-basic font-medium text-xs pr-2">slippage (%)</label>
+                            <label className="font-basic font-medium text-xs pr-2">slippage(%)</label>
                         </div>
                         <div className="flex flex-col self-start">
                             <input 
@@ -193,7 +190,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                                 placeholder="5%"
                                 value={slippage}
                                 onChange={handleSlippage}
-                                className="flex font-basic font-medium text-xs border border-black w-10 pl-1"
+                                className="flex font-basic font-medium text-xs border border-base-22 rounded-xl w-10 pl-1"
                                 step="any"
                             >
                             </input>
@@ -206,11 +203,11 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                 </div>
                 
             </div>
-            <div className="flex flex-col bg-base-4 border-2 border-black">
-                    <div className="flex flex-col bg-white px-2 py-2">
+            <div className="flex flex-col bg-base-4 ">
+                    <div className="flex flex-col bg-white px-2 py-2 border-2 border-base-22 rounded-xl">
                     <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">sell amount (${tokenTicker})</label>
 
-                        <div className="border-2 border-black bg-white">
+                        <div className="bg-slate-50">
                             <input
                                 placeholder={"$"+`${tokenTicker}`}
                                 type="number"
@@ -220,7 +217,7 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                                 value={sellAmountToken}
                                 min="1"
                                 step="any"
-                                className="font-basic font-bold pl-1"
+                                className="font-basic font-bold pl-1 mr-2"
                             >
                             </input>
                         </div>
@@ -235,21 +232,21 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                             <div className="pl-1">
                                 you get 
                             </div>
-                            <div className="border-2 border-black bg-base-1 p-2 b">
+                            <div className=" bg-base-22 p-2 rounded-xl border-base-22">
                                 {ETHAmount ? ethers.utils.formatEther(ETHAmount.toString()) + " ETH" : "0 " + "ETH"}
                             </div>
                         </div>
                     </div>
                 </div>
                 {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status =="Exception") &&
-                    <button className=" border-2 border-black connectbox bg-base-1 font-basic px-4 mt-2"
+                    <button className="bg-base-20 font-basic text-white px-4 py-1 mt-2 rounded-xl"
                         type="submit"
                         >
-                            sell
+                            Sell
                     </button>
                 }
                 {(state.status == "PendingSignature" || state.status == "Mining") &&
-                    <button className="animate-pulse  border-2 border-black bg-base-11 font-basic px-4 mt-2">
+                    <button className="animate-pulse bg-base-21 font-basic px-4 py-1 mt-2">
                         selling...
                     </button>
                 }   

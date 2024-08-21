@@ -122,23 +122,29 @@ export default function Page () {
                 //const tokenName = formData.name
                 //const tokenSymbol = formData.ticker
                 //const tokenInfo = `{"des": "${formData.description || ""}", "twitter": "${formData.twitter || ""}", "telegram": "${formData.telegram || ""}", "website": "${formData.website || ""}", "logo": "${formData.image || ""}"}`
-                const tokenName = escapeSpecialCharsForJSON(formData.name || "")
-                const tokenSymbol = escapeSpecialCharsForJSON(formData.ticker || "")
-                const tokenInfo = {
+                const tokenName = formData.name
+                const tokenSymbol = formData.ticker
+                /*const tokenInfo = {
                     des: escapeSpecialCharsForJSON(formData.description || ""),
                     twitter: escapeSpecialCharsForJSON(formData.twitter || ""),
                     telegram: escapeSpecialCharsForJSON(formData.telegram || ""),
                     website: escapeSpecialCharsForJSON(formData.website || ""),
                     logo: escapeSpecialCharsForJSON(formData.image || "")
-                };
-                const tokenInfoJSON = JSON.stringify(tokenInfo);
+                };*/
+                const tokenInfo = JSON.stringify({
+                    des: formData.description || "",
+                    twitter: formData.twitter || "",
+                    telegram: formData.telegram || "",
+                    website: formData.website || "",
+                    logo: formData.image || ""
+                });
+                
                 const feeAddress = contracts.feeAddress[chainId]
                 const buyAmount = formData.buyAmount > 0 ? ethers.utils.parseEther(formData.buyAmount.toString()) : 0
                 const txValue = buyAmount > 0 ? (buyAmount.add(buyAmount.mul(5).div(1000))).add(fee) : fee
                 {account && chainId &&
-                    send(contractAddresses, tokenName, tokenSymbol, tokenInfoJSON, feeAddress, buyAmount, {value: txValue}) // corrected to txValue from fee. not tested yet
+                    send(contractAddresses, tokenName, tokenSymbol, tokenInfo, feeAddress, buyAmount, {value: txValue}) // corrected to txValue from fee. not tested yet
                 }
-                
             }
             catch(error){
                 //console.error("error on launch", error)
@@ -167,23 +173,23 @@ export default function Page () {
 
 
     return(
-        <div className="flex flex-col font-basic font-medium items-center justify-center min-h-screen bg-base-1 pb-20 ">
+        <div className="flex flex-col font-basic items-center justify-center min-h-screen pb-20 w-full">
             <SuccessModal className="z-10" tx={state} isOpen={isOpen} closeModal={() => closeModal()}/>
             <FailModal className="z-10" isOpen={failOpen} closeModal={() => closeFailModal()}/>
-            <div className={`pb-8 pt-20`}>
-                <img src={launch}></img>
+            <div className={`pb-8 pt-20 text-6xl font-bold text-base-20`}>
+                Launch
             </div>
-            <form className={`connectbox border-4 border-black bg-base-4 py-2 pl-4 sm:pl-10 pr-4 sm:pr-20 h-auto content-center w-5/6 max-w-[700px] z-0`}
+            <form className={`border-2 border-base-20 bg-white rounded-xl py-2 pl-4 sm:pl-10 pr-4 sm:pr-20 h-auto content-center w-5/6 max-w-[700px] z-0 shadow-xl shadow-base-22`}
                 name="launch"
                 onSubmit={handleSubmit}
             >
-                <div className={`font-bold pb-8 pt-2 text-xl`}>
+                <div className={`font-semibold pb-8 pt-2 text-xl`}>
                     input your token params
                 </div>
                 <div className={`flex flex-col justify-between py-3`}>
                 <label className={`font-basic`} htmlFor="name">name</label>
 
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                         placeholder="Coin"
                         type="text"
                         id="name"
@@ -198,7 +204,7 @@ export default function Page () {
                 <div className={`flex flex-col justify-between py-3`}>
                 <label className={`font-basic`} htmlFor="ticker">ticker</label>
 
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                         placeholder="COIN"
                         type="text"
                         id="ticker"
@@ -216,7 +222,7 @@ export default function Page () {
                 <div className={`flex flex-col justify-between py-3`}>
                     <label className={`font-basic`} htmlFor="description">description</label>
 
-                    <textarea className="flex border-2 border-black px-1 text-sm min-h-24 h-auto w-auto"
+                    <textarea className="flex border-2 border-base-22 rounded px-1 text-sm min-h-24 h-auto w-auto"
                         placeholder="token description"
                         type="text"
                         id="description"
@@ -234,7 +240,7 @@ export default function Page () {
                 </div>
                 <div className={`flex flex-col justify-between py-2`}>
                     <label className={`font-basic`} htmlFor="website">website <span className={`font-basic text-xs`}>(optional)</span></label>
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                         placeholder="https://yourwebsite.com"
                         type="text"
                         id="website"
@@ -250,7 +256,7 @@ export default function Page () {
                 </div>
                 <div className={`flex flex-col justify-between py-2`}>
                 <label className={`font-basic`} htmlFor="twitter">twitter <span className={`font-basic text-xs`}>(optional)</span></label>
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                         placeholder="https://x.com/YourX"
                         type="text"
                         id="twitter"
@@ -267,7 +273,7 @@ export default function Page () {
                 <div className={`flex flex-col justify-between py-2`}>
                 <label className={`font-basic`} htmlFor="telegram">telegram <span className={`font-basic text-xs`}>(optional)</span></label>
 
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                             placeholder="https://t.me/YourTG"
                             type="text"
                             id="telegram"
@@ -284,7 +290,7 @@ export default function Page () {
                 <div className={`flex flex-col justify-between py-2`}>
                 <label className={`font-basic`} htmlFor="image">logo <span className={`font-basic text-xs`}>(optional)</span></label>
 
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                             placeholder=".png or .jpg"
                             type="text"
                             id="image"
@@ -301,7 +307,7 @@ export default function Page () {
                 <div className={`flex flex-col justify-between py-3`}>
                 <label className={`font-basic`} htmlFor="buyAmount">buy amount[ETH] <span className={`font-basic text-xs`}>(optional)</span></label>
 
-                    <input className="border-2 border-black px-1 text-sm"
+                    <input className="border-2 border-base-22 rounded px-1 text-sm"
                             placeholder="0.001"
                             type="number"
                             id="buyAmount"
@@ -321,18 +327,17 @@ export default function Page () {
                 {(state.status === "None" || state.status === 'Success' || state.status === 'Fail') &&
                     <div className="flex flex-row justify-end gap-8 py-4">
 
-                        <img className="animate-bounce max-sm:hidden" src={bump} width={imgWidth} height={imgHeight} alt="arrow"></img>
-                        <button type="submit" className={`font-basic connectbox border-4 border-black bg-base-7 py-2 px-8 hover:-translate-y-2 delay-50 hover:scale-110 ease-in-out hover:cursor-pointer`}> launch </button>
+                        <button type="submit" className={`font-basic bg-base-20 text-white font-bold rounded-xl py-2 px-8 hover:-translate-y-2 delay-50 hover:scale-110 ease-in-out hover:cursor-pointer`}> Launch </button>
                     </div>
                 }
                 {(state.status === 'Mining' || state.status === 'PendingSignature') && 
                     <div className="flex flex-row justify-end gap-8 py-4">
-                        <button className={`font-basic connectbox border-4 border-black bg-base-2 py-2 px-8 hover:-translate-y-2 delay-50 hover:scale-110 ease-in-out hover:cursor-pointer animate-pulse`} disabled> launching... </button>
+                        <button className={`font-basic border-2 border-base-20 bg-white text-base-20 rounded-xl py-2 px-8 hover:-translate-y-2 delay-50 hover:scale-110 ease-in-out hover:cursor-pointer animate-pulse`} disabled> launching... </button>
                     </div>
 
                 }
             </form>
-            <div className={`font-bold pt-4`}> launch price: nothang</div>
+            <div className={`font-semibold pt-4`}> launch price: 0.001 ETH</div>
 
 
         </div>

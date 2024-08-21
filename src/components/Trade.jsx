@@ -11,7 +11,7 @@ export default function Trade ({tokenAddress, tokenTicker, tokenBalance, trading
 
     return(
         <div>
-            <div className="fomnt-basic text-lg font-bold">
+            <div className="font-basic text-lg font-bold">
                 trade
             </div>
             <div>

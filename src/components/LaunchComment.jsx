@@ -57,7 +57,7 @@ export default function LaunchComment ({tokenAddress}) {
 
         const sendForm = async (commentData) => {
             setCommentStatus(3)
-            const response = await axios.post(`https://kek.fm/api/postComment/${tokenAddress}`, commentData, {withCredentials: true})
+            const response = await axios.post(`https://kek.fm/api2/postComment/${tokenAddress}`, commentData, {withCredentials: true})
             console.log("response", response)
             if(response.status == 201){ 
                 setCommentStatus(1)
@@ -74,15 +74,15 @@ export default function LaunchComment ({tokenAddress}) {
 
 
     return(
-        <div className="flex flex-col connectbox bg-base-2 border-4 border-black w-full">
+        <div className="flex flex-col bg-white border-2 border-base-22 rounded-xl w-full shadow-xl shadow-base-22">
             <CommentSuccessModal closeModal={closeModal} commentStatus={commentStatus}/>
             <CommentFailModal closeModal={closeModal} commentStatus={commentStatus} />
             <form
                 name="commentform"
                 onSubmit={handleSubmit}
             >
-                <div className="mx-4 font-basic font-bold">
-                    <label htmlFor="comment"> your comment</label>
+                <div className="mx-4 font-basic font-semibold">
+                    <label htmlFor="comment"> Your Comment</label>
                 </div>
                 <div className="flex w-full">
                     <textarea
@@ -92,7 +92,7 @@ export default function LaunchComment ({tokenAddress}) {
                         name="comment"
                         onChange={handleChange}
                         value={commentText}
-                        className="connectbox mx-4 mt-2 border-4 border-black w-full md:h-24"
+                        className="mx-4 mt-2 pl-1 border-2 border-base-22 rounded-xl w-full md:h-24"
                     >
                     </textarea>
                 </div>
@@ -102,7 +102,7 @@ export default function LaunchComment ({tokenAddress}) {
                 <div>
                     { (commentStatus == 0 || commentStatus == 1 || commentStatus == 2) &&
                         <button 
-                            className="connectbox border-4 border-black bg-base-1 font-basic px-2 mx-4 my-2"
+                            className="bg-base-20 text-white rounded-xl font-semibold font-basic px-4 py-1 mx-4 my-2"
                             type="submit"
                             >
                                 post
@@ -110,7 +110,7 @@ export default function LaunchComment ({tokenAddress}) {
                     }
                     { commentStatus == 3 &&
                         <button 
-                            className="connectbox border-4 border-black bg-base-11 px-2 mx-4 my-2 animate-pulse"
+                            className="border-2 border-base-22 bg-slate-50 px-2 mx-4 my-2 rounded-xl animate-pulse text-base-20"
                             type="submit"
                             >
                                 posting...

@@ -8,10 +8,10 @@ export default function Holders ({data}) {
     return(
         <div className="flex flex-col md:items-start ">
             <div className="flex flex-col">
-                <div className="font-basic font-bold text-xl">
+                <div className="font-basic font-semibold text-xl">
                     holders
                 </div>
-                <div className="flex connectbox bg-white font-basic border-4 border-black max-w-[400px] p-2 ">
+                <div className="flex bg-white font-basic border-2 border-base-22 rounded-xl shadow-xl shadow-base-22 max-w-[400px] p-2 ">
                     <table className=" w-full md:text-xl overflow-x-auto">
                         <thead>
                             <tr className="">

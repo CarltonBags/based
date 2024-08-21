@@ -3,7 +3,8 @@ import { Connect } from "./Connect";
 import { NavAccount } from "./NavAccount";
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import burger from "../assets/burger.svg";
+import burger from "../assets/burgermenu.svg";
+import logo from "../assets/BasedPad.svg";
 import { useEthers } from '@usedapp/core';
 import Recent from './Recent';
 
@@ -35,10 +36,11 @@ export default function Navbar() {
     }, [isOpen]);
 
     return (
-        <div className="font-basic font-semibold flex flex-row justify-between pt-8 bg-base-1">
+        <div className="font-basic font-semibold flex flex-row justify-between pt-8 pb-4">
             <Link to="/">
-                <div className="text-4xl connectbox max-sm:ml-2 ml-8 px-10 py-2 border-4 border-black bg-base-4 ">
-                    kek
+                <div className="w-64 ml-2">
+                    <img src={logo} className="border rounded">
+                    </img>
                 </div>
             </Link>
             <div className="max-xl:hidden">
@@ -56,8 +58,8 @@ export default function Navbar() {
                 </div>
                 {isOpen && (
                     <div className="flex fixed inset-0 z-50 mt-20 h-80 max-w-80" ref={boxRef}>
-                        <div className="flex flex-col connectbox fixed inset-0 bg-base-2 mx-4 border-4 border-black p-10 mt-32 h-64 max-w-[300px]">
-                            <div className="font-basic font-bold pb-4 text-xl">navigate</div>
+                        <div className="flex flex-col fixed inset-0 bg-base-2 mx-4 border-2 border-base-22 bg-slate-50 rounded-xl p-10 mt-32 h-64 max-w-[300px]">
+                            <div className="font-basic font-bold text-base-20 pb-4 text-xl">BasedPad</div>
                             <div className="flex flex-col z-100">
                                 {account &&
                                     <NavAccount handleOpen={handleOpen} isOpen={isOpen} />

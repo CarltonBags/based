@@ -26,7 +26,6 @@ export default function LaunchCard ({tag, data}) {
             navigate(`/launch?token=${tokenAddress}`)
         }
     }
-    const d = JSON.parse(data.description)
 
     const handleSocials = (e, url) => {
         e.stopPropagation()
@@ -37,7 +36,11 @@ export default function LaunchCard ({tag, data}) {
         e.stopPropagation()
         if(e.target.name==="dev" || e.target.closest('[name="dev"]'))
         navigate(`/me?account=${data.owner}`)
-        console.log("data.owner", data.owner)
+    }
+    const handleToken = (e) => {
+        e.stopPropagation()
+        if(e.target.name==="tkn" || e.target.closest('[name="tkn"]'))
+        window.open(`https://testnet.bscscan.com/address/${data.tokenAddress}`, "_blank")
     }
 
     const handleImageError = () => {
@@ -54,7 +57,7 @@ export default function LaunchCard ({tag, data}) {
         ))
         filtered.sort((a,b) => (b.timestamp - a.timestamp))
         const latest = filtered[0]
-        console.log("latest", latest)
+        
         
         if(latest){
             const soldTokens = (100000 - Number(ethers.utils.formatEther(latest.contractTokenBalance)))
@@ -78,19 +81,19 @@ export default function LaunchCard ({tag, data}) {
 
 
     return(
-    <div onClick={handleClick} name="box" className={`flex flex-col connectbox border-4 border-black w-[280px] h-[200px] bg-base-19 opacity-90 hover:opacity-100 hover:bg-base-5 hover:scale-110 hover:cursor-pointer ${data.wiggle ? 'wiggle2' : ''}`} >
+    <div onClick={handleClick} name="box" className={`flex flex-col border-2 border-base-20 rounded-xl w-[280px] h-[200px] hover:opacity-100 hover:bg-base-22 hover:scale-110 hover:cursor-pointer shadow-xl shadow-base-22 ${data.wiggle ? 'wiggle2' : ''}`} >
         <div className= "flex flex-row">
             <div className="flex flex-row justify-between">
-                <div className=" w-[100px] h-[100px] border-4 rounded-full border-black mx-2 my-4 content-center overflow-hidden">
-                    {d && d.logo &&
-                        <img src={d.logo} layout="fill" className="w-full h-full object-cover rounded-full" alt="logo" onError={handleImageError}/>
+                <div className=" w-[100px] h-[100px] border-4 rounded-full border-base-20 mx-2 my-4 content-center overflow-hidden">
+                    {data && data.d.logo &&
+                        <img src={data.d.logo} layout="fill" className="w-full h-full object-cover rounded-full" alt="logo" onError={handleImageError}/>
                     }
-                    {d && !d.logo &&
+                    {data  && !data.d.logo &&
                         <img src={noimage} layout="fill" className="w-full h-full object-cover rounded-full" alt="logo"/>
                     }
                 </div>
                 <div className="flex flex-col pl-2 pt-2 overflow-hidden" >
-                    <div className={`font-basic font-bold text-md`}>{data.name}</div>
+                    <div className={`font-basic font-bold text-md`}>{data.d.name}</div>
     
                     <div className="flex flex-col items-start justify-start w-[120px]">
                         <div className={`font-basic flex text-xs text-black font-bold items-center`}>
@@ -99,25 +102,28 @@ export default function LaunchCard ({tag, data}) {
                         <Progressbar percentage={percentage} />
                     </div>
                     <div className= "flex flex-row justify-start gap-2 pt-1">
-                        {d && d.website &&
-                            <div name="web" className="text-xs z-100" onClick={(e) => handleSocials(e, d.website)}>
+                        {data && data.d.website &&
+                            <div name="web" className="text-xs z-100" onClick={(e) => handleSocials(e, data.d.website)}>
                                 [web]
                             </div>
                         }
-                        {d && d.twitter &&
-                            <div name="twitter" className="text-xs z-100" onClick={(e) => handleSocials(e, d.twitter)}>
+                        {data && data.d.twitter &&
+                            <div name="twitter" className="text-xs z-100" onClick={(e) => handleSocials(e, data.d.twitter)}>
                                 [x]
                             </div>
                         }
-                        {d && d.telegram &&
-                            <div name="telegram" className="text-xs z-100" onClick={(e) => handleSocials(e, d.telegram)}>
+                        {data && data.d.telegram &&
+                            <div name="telegram" className="text-xs z-100" onClick={(e) => handleSocials(e, data.d.telegram)}>
                                 [telegram]
                             </div>
                         }
                         
                     </div>
                     <div className={`mt-2 text-xs text-black`} name="dev" onClick={handleDev}>
-                        created by <span className='text-base-8 font-semibold'>{data.owner.slice(0,4)}...{data.owner.slice(data.owner.length -4, data.owner.length)}</span>
+                        created by <span className='text-base-20 font-semibold'>{data.owner.slice(0,4)}...{data.owner.slice(data.owner.length -4, data.owner.length)}</span>
+                    </div>
+                    <div className={`mt-1 text-xs text-black`} name="tkn" onClick={handleToken}>
+                        address <span className='text-base-20 font-semibold'>{data.tokenAddress.slice(0,4)}...{data.tokenAddress.slice(data.tokenAddress.length -4, data.tokenAddress.length)}</span>
                     </div>
 
                 </div>
@@ -125,7 +131,7 @@ export default function LaunchCard ({tag, data}) {
             </div>
         </div>
         <div className='font-basic font-bold text-xs text-wrap truncate px-1 py-1 mx-2 h-12'>
-            {d.des.slice(0,205)}...
+            {data.d.des.slice(0,205)}...
         </div>
     </div>
     )

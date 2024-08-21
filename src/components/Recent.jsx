@@ -34,10 +34,10 @@ export default function Recent () {
 
     const fetchData = async () => {
         try{
-            const getCreated = await axios.get('https://kek.fm/api/getLastCreated',{withCredentials: true})
+            const getCreated = await axios.get('https://kek.fm/api2/getLastCreated',{withCredentials: true})
             setCreated(getCreated.data)
     
-            const getLast = await axios.get('https://kek.fm/api/getLast',{withCredentials: true})
+            const getLast = await axios.get('https://kek.fm/api2/getLast',{withCredentials: true})
             const last = getLast.data
 
             const list = [...last[0].buys,...last[0].sells]
@@ -101,11 +101,11 @@ export default function Recent () {
             <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex ">
                     {buySell && buySell.type === "buy" &&
-                        <div className="flex flex-col wiggle" onClick={handleClick}>
-                            <div>
-                                <img src={lastbuy} className="w-[50px]"></img>
+                        <div className="flex flex-col wiggle font-basic font-bold text-sm " onClick={handleClick}>
+                            <div className="text-base-20">
+                                Buy!                            
                             </div>
-                            <div className="font-basic text-xs font-semibold py-2 connectbox border-4 border-black w-[200px] overflow-x-hidden bg-base-12 hover:cursor-pointer" >
+                            <div className="font-basic text-xs font-semibold py-2 rounded border border-black w-[200px] overflow-x-hidden bg-base-12 hover:cursor-pointer" >
                                 <div className="flex flex-row gap-2 px-2">
                                     <div>
                                     {buySell.maker.slice(0,4)+"..."+buySell.maker.slice(buySell.maker.length -4, buySell.maker.length)} bought {Number(ethers.utils.formatEther(buySell.amountETH.toString())).toFixed(3)} ETH                     
@@ -116,10 +116,10 @@ export default function Recent () {
                     }
                     {buySell && buySell.type === "sell" && 
                         <div className="flex flex-col" onClick={handleClick}>
-                            <div>
-                                <img src={lastsale} className="w-[50px]"></img>
+                            <div className="text-base-20">
+                                Sell!
                             </div>
-                            <div className="font-basic text-xs py-2 connectbox border-4 border-black w-[200px] bg-base-8 overflow-x-hidden hover:cursor-pointer" >
+                            <div className="font-basic text-xs py-2 rounded border border-black w-[200px] bg-base-8 overflow-x-hidden hover:cursor-pointer" >
                                 <div className="flex flex-row  gap-2 px-2">
                                     <div>
                                         {buySell.maker.slice(0,4)+"..."+buySell.maker.slice(buySell.maker.length -4, buySell.maker.length)} sold {Number(ethers.utils.formatEther(buySell.amountETH.toString())).toFixed(3)} ETH
@@ -130,18 +130,17 @@ export default function Recent () {
                     }
                 </div>
                 {created &&
-                    <div>
-                        <div>
-                            <img src={newpic} className="w-[50px]"></img>
+                    <div className="">
+                        <div className="font-basic font-bold text-sm text-base-20">
+                            New!
                         </div>
-                        <div onClick={handleCreated} className="font-basic text-xs font-semibold connectbox border-4 px-2 py-2 border-black w-[200px] overflow-x-hidden hover:cursor-pointer hover:bg-base-2">
+                        <div onClick={handleCreated} className="font-basic text-xs text-white font-semibold rounded border px-2 py-2 border-black w-[200px] overflow-x-hidden hover:cursor-pointer bg-base-20">
                              {created.name} (${created.symbol})
                         </div>
                     </div>
                 }
             </div>
             <div>
-                <ChainSelector />
             </div>
         
         </div>

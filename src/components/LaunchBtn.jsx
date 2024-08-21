@@ -7,8 +7,8 @@ export default function LaunchBtn () {
     return(
         
         <Link to="/create">
-            <div className={`flex justify-center connectbox border-4 border-black bg-base-2 py-2 px-8 hover:-translate-y-2 delay-50 hover:scale-110 ease-in-out hover:cursor-pointer w-36 -rotate-6`}>
-                launch
+            <div className={`flex justify-center text-white text-xl bg-base-22 rounded-xl py-2 px-8 hover:scale-110 ease-in-out hover:cursor-pointer hover:text-white hover:bg-base-20 w-64 h-12 font-basic`}>
+                start new token
             </div>
         </Link>
         

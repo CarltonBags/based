@@ -9,14 +9,14 @@ export default function Terms () {
             <div>
                 <h1 className= "text-2xl font-bold pb-4">Service Usage Agreement</h1>
                 <p>
-                    This Agreement delineates the terms under which you may utilize the Products and Interface of the KEK protocol (“Protocol”) provided to you by the KEK-Team (“we, our, us”). Before proceeding, please review these terms carefully. Your continuation with the Interface signifies full acceptance of this Agreement. Should you disagree with any part of this Agreement, you must refrain from using the Interface.
+                    This Agreement delineates the terms under which you may utilize the Products and Interface of the BasedPad protocol (“Protocol”) provided to you by the BasedPad-Team (“we, our, us”). Before proceeding, please review these terms carefully. Your continuation with the Interface signifies full acceptance of this Agreement. Should you disagree with any part of this Agreement, you must refrain from using the Interface.
                     Please note that you should only interact with the Interface if you wholeheartedly accept these terms.
                 </p>
             </div>
             <div>
                 <h3 className="text-xl font-bold">Changes to the Agreement</h3>
                 <p>
-                    We retain exclusive discretion to amend this Agreement. Should amendments occur, we'll inform you with an updated date atop the Agreement and keep the latest version available on KEK's service terms. Changes take effect upon posting, and your continued Interface engagement will act as your consent to the amended terms. If you do not consent to these changes, you must cease using the Interface immediately.
+                    We retain exclusive discretion to amend this Agreement. Should amendments occur, we'll inform you with an updated date atop the Agreement and keep the latest version available on BasedPad's service terms. Changes take effect upon posting, and your continued Interface engagement will act as your consent to the amended terms. If you do not consent to these changes, you must cease using the Interface immediately.
                 </p>
             </div>
             <div>
@@ -128,7 +128,7 @@ export default function Terms () {
                 </p>
             </div >
             <div className="pb-20 font-bold">
-                Your KEK-Team
+                Your BasedPad-Team
             </div>
 
         </div>  

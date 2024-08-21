@@ -22,7 +22,7 @@ export default function Chart({ data }) {
         const chartOptions = {
             layout: {
                 textColor: 'white',
-                background: { type: 'solid', color: '#ff69b4' },
+                background: { type: 'solid', color: "#a2b4fe" },
             },
             timeScale: {
                 timeVisible: true,
@@ -95,12 +95,12 @@ export default function Chart({ data }) {
     }, [data, seconds]);
 
 
-    return (
+    return(
         <div className="flex flex-col justify-start">
-            <div className="font-basic text-xl font-bold">
+            <div className="font-basic text-xl font-semibold">
                 chart
             </div>
-            <div className="flex connectbox border-4 border-black bg-white p-4">
+            <div className="flex border-2 border-base-22 rounded-xl bg-white p-4 shadow-xl shadow-base-22">
                 <div ref={chartContainerRef} style={{ width: '700px', height: '300px' }}></div>
             </div>
         </div>

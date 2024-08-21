@@ -12,10 +12,10 @@ export default function Footer () {
     return(
         <div className="flex flex-col py-20 items-center">
         <div className="font-basic font-semibold max-sm:text-xs sm:font-bold">
-          - this protocol is sufficiently degentralized -
+          - presented by -
         </div>
         <div className="font-basic pt-4">
-          kek © 2024
+          BasedPad © 2024
         </div>
         <div className="font-basic pt-4 hover:cursor-pointer" onClick={handleClick}>
           {"[terms]"}

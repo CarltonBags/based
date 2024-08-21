@@ -14,9 +14,9 @@ export default function ExplainerModal ({isOpen, handleExplainerModal}) {
           <div className="fixed inset-0 bg-black opacity-70" onClick={handleExplainerModal}></div>
 
           {/* Modal content */}
-          <div className="relative bg-base-11 connectbox border-4 border-black py-6 px-10 z-50 max-w-md w-full mx-4 shadow-lg">
+          <div className="relative bg-base-22 connectbox border-4 border-black py-6 px-10 z-50 max-w-md w-full mx-4 shadow-lg">
             <div className={`font-basic font-bold text-3xl pb-2 pt-2 text-center`}>
-              how it werks
+              how it works
             </div>
             <div className={`font-basic font-medium text-lg pb-4 pt-2 text-start`}>
               every token on kek.gm is a rug-proof fair launch without any team allocation or presale which has a total supply of 100k tokens.
@@ -42,7 +42,7 @@ export default function ExplainerModal ({isOpen, handleExplainerModal}) {
                     3. 
                 </div>
                 <div className={`font-basic font-medium text-lg pb-4 text-start`}>
-                    once the token hits 100% on the bonding curve, liquidity will be added on uniswap
+                    once the token hits 100% on the bonding curve, liquidity will be added on BasedSwap
                 </div>
             </div>
           </div>

@@ -173,7 +173,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
     }
 
     return(
-        <div className="connectbox border-4 border-black bg-base-2 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
+        <div className="font-basic border-2 border-base-22 bg-slate-50 rounded-xl shadow-xl shadow-base-22 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
             <BuyModal className="z-100" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
             <form
                 name="buy"
@@ -186,7 +186,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                     </div>
                     <div className="flex flex-row items-center">
                         <div className="flex self-start">
-                            <label className="font-basic font-medium text-xs pr-2">slippage (%)</label>
+                            <label className="font-basic font-medium text-xs pr-2">slippage(%)</label>
                         </div>
                         <div className="flex flex-col self-start">
                             <input 
@@ -195,7 +195,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                                 placeholder="5%"
                                 value={slippage}
                                 onChange={handleSlippage}
-                                className="flex font-basic font-medium text-xs border border-black w-10 pl-1"
+                                className="flex font-basic font-medium text-xs border border-base-22 rounded-xl w-10 pl-1"
                                 step="any"
                             >
                             </input>
@@ -209,11 +209,11 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
             </div>
             
             
-            <div className="flex flex-col bg-base-4 border-2 border-black">
-                    <div className="flex flex-col bg-white px-2 py-2 ">
+            <div className="flex flex-col bg-base-4 border-2 border-base-22 rounded-xl">
+                    <div className="flex flex-col bg-white px-2 py-2 rounded-xl">
                     <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">buy amount (ETH)</label>
 
-                        <div className="border-2 border-black bg-white">
+                        <div className="bg-white ">
                             <input
                                 placeholder="ETH"
                                 type="number"
@@ -223,7 +223,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                                 value={buyAmountETH}
                                 min="0.0001"
                                 step="any"
-                                className="font-basic font-bold pl-1"
+                                className="font-basic font-bold pl-1 mr-2"
                             >
                             
                             </input>
@@ -240,23 +240,23 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                             >
                                 you get 
                             </div>
-                            <div className="border-2 border-black bg-base-1 p-2 b">
+                            <div className="border-2 border-base-22 rounded-xl bg-base-22 p-2 ">
                                 {tokenAmount ? ethers.utils.formatEther(tokenAmount.toString()) + "$" + tokenTicker : "0 $" + tokenTicker}
                             </div>
                         </div>
                     </div>
                 </div>
                 {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status == "Exception") &&
-                    <button className=" border-2 border-black connectbox bg-base-1 font-basic text-md px-4 mt-2"
+                    <button className="border-2 border-base-20 bg-slate-50 font-basic text-base-20 rounded-xl text-md px-4 py-1 mt-2"
                         type="submit"
                         >
-                            buy
+                            Buy
                     </button>
 
 
                 }
                 {(state.status == "PendingSignature" || state.status == "Mining") &&
-                    <button className="animate-pulse border-2 border-black bg-base-11 font-basic px-4 mt-2">
+                    <button className="animate-pulse border-2 border-base-20 bg-base-22 rounded-xl font-basic px-4 mt-2">
                         buying...
                     </button>
                 }

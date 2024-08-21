@@ -32,22 +32,8 @@ export default function Hero () {
     }
 
     return(
-        <div className="relative flex flex-col gap-6">
-            <div className="absolute w-[300px] -rotate-6 top-40 max-lg:hidden">
-                <img src={modulus} className="w-[300px]"></img>
-            </div>
-            <div className="absolute w-[300px] rotate-6 right-10 top-60 max-lg:hidden">
-                <img src={time} className="w-[300px]"></img>
-            </div>
-            <div className="absolute w-[300px] -rotate-12 left-52 top-60 max-lg:hidden">
-                <img src={memes} className="w-[300px]"></img>
-            </div>
-            <div className="absolute w-[200px] rotate-6 left-40 bottom-10 max-lg:hidden">
-                <img src={many} className="w-[200px]"></img>
-            </div>
-            <div className="absolute w-[300px] -rotate-6 right-40 bottom-10 max-lg:hidden">
-                <img src={cult} className="w-[300px]"></img>
-            </div>
+        <div className="relative flex flex-col gap-6 ">
+            
             <div className="xl:hidden z-10">
                 <Recent />
             </div>
@@ -56,15 +42,15 @@ export default function Hero () {
                 <ExplainerModal isOpen={isExplainerOpen} handleExplainerModal={handleExplainerModal}/>
             </div>
             <div className="relative font-basic font-bold flex flex-col sm:flex-row sm:gap-20 gap-4 sm:justify-center sm:w-full text-center">
-                <div className="flex justify-center">
+                {/*<div className="flex justify-center">
                     <TelegramBtn />
-                </div>
+                </div>*/}
                 <div className="flex justify-center">
                     <LaunchBtn /> 
                 </div>
-                <div className="flex justify-center">
+                {/*<div className="flex justify-center">
                     <TwitterBtn />
-                </div>
+                </div>*/}
                {/*<div className="absolute z-200 -top-44 right-10">
                     <LastTrade />
                 </div>*/}

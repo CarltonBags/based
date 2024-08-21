@@ -29,11 +29,13 @@ export default {
           17:'#bafca2', //very light green
           18:'#ffb2ef', //light rose
           19:'#fdfd96',
-
+          20:"#103bfc", //based blue
+          21:"#5d77e9",  //lighter blue
+          22:"#a2b4fe" //even lighter blue
         }
       },
       fontFamily:{
-        basic: ["IBM Plex Sans", "sans-serif"]
+        basic: ["Fira Code", "sans-serif"]
       },
       fontWeight: {
         'light': 300,
@@ -52,6 +54,9 @@ export default {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.5)' },
         },
+      },
+      backgroundImage: {
+        'blue-to-white': "h-screen w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#ADBCFE] via-[#EAEDFF] to-[#EAEDFF] flex items-center justify-center",
       },
     },
   },

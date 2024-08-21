@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../globals.css"
 import noimage from "../assets/noimage.svg"
 import chain from "../assets/chain.svg"
-import arrows from "../assets/arrews.svg"
+import arrows from "../assets/basedarrows.svg"
 import realshit from "../assets/tehshit2.svg"
 import crown from "../assets/crown.svg"
 import Progressbar from "./Progressbar";
@@ -26,7 +26,7 @@ export default function TehShit(){
         const fetchData = async () => {
             try{
                 
-                const response = await axios.get("https://kek.fm/api/getShit",{withCredentials: true})
+                const response = await axios.get("https://kek.fm/api2/getShit",{withCredentials: true})
                 const shit = response.data
                 shit.sort((a,b) => b.timestamp - a.timestamp)
                 //console.log("shit",shit)
@@ -34,7 +34,7 @@ export default function TehShit(){
                 if(shit){
                     const latestShit = shit[0].tokenAddress
                     //console.log("latestshit",latestShit)
-                    const res = await axios.get(`https://kek.fm/api/getOne/${latestShit}`, {withCredentials: true})
+                    const res = await axios.get(`https://kek.fm/api2/getOne/${latestShit}`, {withCredentials: true})
                     const newShit = res.data[0]
                     //console.log("tehshit", newShit)
                     //console.log("owner", newShit.owner)
@@ -79,17 +79,14 @@ export default function TehShit(){
     }
 
     return(
-        <div className="relative flex flex-col font-basic max-w-72 items-center pb-10" >
+        <div onClick={() => handleClick()} className="relative flex flex-col font-basic max-w-80 items-center pb-10 border-2 border-base-21 p-4 rounded-xl shadow-xl shadow-base-22 hover:scale-110 hover:cursor-pointer" >
             {/*<div className="text-3xl font-bold text-center connectbox border-4 border-black mb-3">
                 this is teh shit!
             </div>*/}
-            <div className="max-w-[280px]">
-                <img className="max-w-[280px]" src={realshit}></img>
+            <div className="font-basic font-bold text-4xl text-base-20 mb-10">
+                Most Based
             </div>
-            <div className=" flex items-center justify-center w-[100px] h-[66px] animate-bounce ">
-                <img src={arrows} className="max-h-[66px] max-w-[100px] object-cover"></img>
-            </div>
-            <div className="flex flex-row shitbox border-4 border-base-2 p-2 gap-2 bg-base-11 relative hover:border-base-5 hover:cursor-pointer hover:scale-110 max-w-[250px] hover:cursor-pointer  hover:border-base-2" onClick={() => handleClick()}>
+            <div className="flex flex-row rounded p-2 gap-2 bg-base-20 relative hover:border-base-5 hover:cursor-pointer max-w-[300px] hover:cursor-pointer hover:border-base-2">
                 <div className="flex rounded-full w-[80px] h-[80px] border-4 border-black overflow-hidden">
                     {d && d.logo &&
                         <img src={d.logo} alt="logo" layout="fill" className="w-full h-full object-cover rounded-full" ></img>
@@ -98,7 +95,7 @@ export default function TehShit(){
                         <img src={noimage} alt="logo" layout="fill" className="w-full h-full object-cover rounded-full" ></img>
                     }
                 </div>
-                <div className="flex-col">
+                <div className="flex-col text-white">
                     <div className="font-basic text-xs pt-1">
                         <span >name:</span> <span className="font-bold">{tehShit.name}</span>
                     </div>
@@ -118,16 +115,12 @@ export default function TehShit(){
                         </div>
                     }
                     <div className="font-basic text-xs pt-1">
-                        dev jeeted? {jeet ? <span className="font-bold">yes</span> : <span className="font-bold">no</span>}
+                        dev sold? {jeet ? <span className="font-bold">yes</span> : <span className="font-bold">no</span>}
                     </div>
                 </div>
-                <div className="absolute -top-6 -right-8 ">
-                    <img src={crown} className="w-16 "></img>
-                </div>
+                
             </div>
-            <div className="absolute top-72 z-100 " onClick={handleClick}>
-                <img src={chain} className="w-[220px] "></img>
-            </div>
+         
         </div>
     )
 

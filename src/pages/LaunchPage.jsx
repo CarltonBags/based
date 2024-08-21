@@ -39,7 +39,7 @@ export default function LaunchPage () {
     useEffect(()=>{
         const fetchData = async (tokenAddress) =>{
             try{
-                const response = await axios.get(`https://kek.fm/api/getOne/${tokenAddress}`)
+                const response = await axios.get(`https://kek.fm/api2/getOne/${tokenAddress}`)
                 const data = response.data[0]
                 //console.log("launch page data",data)
                 setProps(data)
@@ -90,11 +90,7 @@ export default function LaunchPage () {
                 const d = JSON.parse(data.description)
                 setD(d)
 
-                console.log("data.description", data.description)
-                console.log("d.des", d.des)
-
-
-                const uniswap = await axios.get(`https://kek.fm/api/getOneUniswap/${tokenAddress}`)
+                const uniswap = await axios.get(`https://kek.fm/api2/getOneUniswap/${tokenAddress}`)
                 if(uniswap.data.length > 0){
                     setTrading(false)
                 }
@@ -140,8 +136,8 @@ export default function LaunchPage () {
 
     return(
         <div className="flex flex-col items-center w-full pt-10">
-            <div className="flex justify-center pb-4">
-                <img src={tokenpage} className="max-w-[280px]"></img>
+            <div className="flex justify-center pb-4 text-6xl font-basic font-bold text-base-20">
+                Token Page
             </div>
             {props && d &&
             <div className="flex flex-col pt-10">
@@ -149,9 +145,9 @@ export default function LaunchPage () {
                     <div className="flex flex-col">
                         <div className="flex flex-col">
                             <div className="flex flex-col lg:flex-row">
-                                <div className="max-w-[250px] lg:max-w-[300px] h-auto pt-2">
-                                    { d && d.logo && <img src={d.logo} alt="no image" className="aspect-square object-contain border-4 border-black bg-black connectbox"/>}
-                                    { d && !d.logo && <img src={noimage} alt="no image" className="aspect-square object-contain border-4 border-black bg-black connectbox"/>}
+                                <div className="max-w-[250px] lg:max-w-[300px] h-auto pt-2 ">
+                                    { d && d.logo && <img src={d.logo} alt="no image" className="aspect-square object-contain border-4 border-base-22 bg-black rounded-xl shadow-xl shadow-base-22"/>}
+                                    { d && !d.logo && <img src={noimage} alt="no image" className="aspect-square object-contain border-4 border-base-22 bg-black rounded-xl shadow-xl shadow-base-22"/>}
                                 </div>
                                 <div className="flex flex-col pl-2 pt-2 w-full ">
                                     <div className={`font-basic font-bold text-md text-black`}>
@@ -188,14 +184,14 @@ export default function LaunchPage () {
                                         
                                     </div>
                                     <div className={`mt-2 text-xs text-black hover:cursor-pointer`} onClick={goToDev}>
-                                        created by <span className='text-base-2 font-semibold'>{props.owner.slice(0,4)}...{props.owner.slice(props.owner.length -4, props.owner.length)}</span>
+                                        created by <span className='text-base-20 font-semibold'>{props.owner.slice(0,4)}...{props.owner.slice(props.owner.length -4, props.owner.length)}</span>
                                     </div>
                                     <div className="flex flex-row gap-2 text-xs pt-2">
                                         <div>
-                                            <span className="font-bold">buys:</span> <span className="text-base-2 font-bold">{uniqueBuys.length}</span>
+                                            <span className="font-bold">buys:</span> <span className="text-base-20 font-bold ">{uniqueBuys.length}</span>
                                         </div>
                                         <div>
-                                            <span className="font-bold">sells:</span> <span className="text-base-2 font-bold">{uniqueSells.length}</span>
+                                            <span className="font-bold">sells:</span> <span className="text-base-20 font-bold">{uniqueSells.length}</span>
                                         </div>
                                     </div>
                                     <div className="text-xs pt-2">
@@ -203,7 +199,7 @@ export default function LaunchPage () {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex text-sm connectbox max-w-[300px] lg:max-w-[480px] h-28 border-2 border-black mt-6 px-1 mb-4 mr-2 bg-white  overflow-auto'>
+                            <div className='flex font-basic text-base-20 text-sm max-w-[300px] lg:max-w-[480px] h-28 border-2 border-base-22 rounded-xl mt-6 px-1 mb-4 mr-2 bg-white overflow-auto shadow-xl shadow-base-22'>
                                 {d.des}
                             </div>
                         </div>
@@ -220,15 +216,15 @@ export default function LaunchPage () {
                             
                             {tokenBalance ? 
                                 <div className="flex items-start justify-start">
-                                    <div className="flex text-sm border-4 border-black font-basic font-semibold connectbox bg-base-2 p-1 mr-2 max-sm:w-[250px] max-w-[300px]"> 
-                                        your balance: {ethers.utils.formatEther(tokenBalance)} ${props.symbol}
+                                    <div className="flex text-sm bg-slate-50 border-2 border-base-22 rounded-xl font-basic font-semibold p-1 mr-2 max-sm:w-[250px] max-w-[300px] shadow-xl shadow-base-22 text-base-20"> 
+                                        Your Balance: {ethers.utils.formatEther(tokenBalance)} ${props.symbol}
                                     </div>
                                 </div>
                                 
                                 :
                                 <div className="flex justify-start">
-                                    <div className="flex text-sm border-4 border-black font-basic font-semibold connectbox bg-base-2 p-1 mr-2 max-sm:w-[250px] max-w-[300px]">
-                                        your balance: 0 ${props.symbol}
+                                    <div className="flex text-sm bg-slate-50 border-2 rounded-xl border-base-22 font-basic font-semibold p-1 mr-2 max-sm:w-[250px] max-w-[300px] shadow-xl shadow-base-22 text-base-20">
+                                        Your Balance: 0 ${props.symbol}
                                     </div>
                                 </div>   
                             }
