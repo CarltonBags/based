@@ -56,7 +56,7 @@ export default function Recent () {
     
     useEffect(()=> {
         const socket = io('https://kek.fm', {
-            path: '/socket.io/',
+            path: '/socket.io2/',
             transports: ['websocket', 'polling'], // Allow both transports
             withCredentials: true,
         });
