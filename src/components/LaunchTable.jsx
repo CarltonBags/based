@@ -42,11 +42,13 @@ useEffect(() => {
         try {
             let chain = chainId || 97;
 
-            const response = await axios.get(`https://kek.fm/api2/getCreated/${page}?chainId=${chain}`, {
+            const response = await axios.get(`https://basedpad.app/api2/getCreated/${page}?chainId=${chain}`, {
                 withCredentials: true,
             });
 
             const data = response.data.data;
+            console.log('API Response:', response.data); // Log the entire response
+
             const maxPages = response.data.totalPages;
             setMax(maxPages);
 
@@ -74,8 +76,8 @@ useEffect(() => {
 
 
     useEffect(() => {
-        const socket = io('https://kek.fm', {
-            path: '/socket.io2/',
+        const socket = io('https://basedpad.app', {
+            path: '/socket.io/',
             transports: ['websocket', 'polling'], // Allow both transports
             withCredentials: true,
         });
@@ -116,7 +118,7 @@ useEffect(() => {
 
     return (
         <div className="flex flex-col justify-center w-full ">
-             <div className="flex text-6xl font-basic font-bold justify-center text-base-20">
+             <div className="flex text-6xl font-basic font-bold justify-center text-base-20 pb-4">
                 Launches
             </div>
             <div className="flex flex-col items-center min-h-[500px] ">

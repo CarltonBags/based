@@ -21,12 +21,9 @@ export default function SellModal ({isOpen, closeModal}) {
           <div className="fixed inset-0 bg-black opacity-70" onClick={closeModal}></div>
 
           {/* Modal content */}
-          <div className="relative bg-base-8 connectbox border-4 border-black py-6 px-10 z-50 max-w-md w-full mx-4 shadow-lg">
+          <div className="relative bg-base-8 rounded-xl py-6 px-10 z-50 max-w-md w-full mx-4 shadow-lg">
             <div className={`font-basic font-bold text-3xl pb-2 pt-2 text-center`}>
               success!
-            </div>
-            <div className={`font-basic text-xl pb-4 pt-2 text-center`}>
-              see ya, my chad!
             </div>
             <div className={`font-basic text-xl pb-4 text-center`}>
               your sell was successful!

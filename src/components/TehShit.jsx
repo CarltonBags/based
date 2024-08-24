@@ -26,7 +26,7 @@ export default function TehShit(){
         const fetchData = async () => {
             try{
                 
-                const response = await axios.get("https://kek.fm/api2/getShit",{withCredentials: true})
+                const response = await axios.get("https://basedpad.app/api2/getShit",{withCredentials: true})
                 const shit = response.data
                 shit.sort((a,b) => b.timestamp - a.timestamp)
                 //console.log("shit",shit)
@@ -34,7 +34,7 @@ export default function TehShit(){
                 if(shit){
                     const latestShit = shit[0].tokenAddress
                     //console.log("latestshit",latestShit)
-                    const res = await axios.get(`https://kek.fm/api2/getOne/${latestShit}`, {withCredentials: true})
+                    const res = await axios.get(`https://basedpad.app/api2/getOne/${latestShit}`, {withCredentials: true})
                     const newShit = res.data[0]
                     //console.log("tehshit", newShit)
                     //console.log("owner", newShit.owner)

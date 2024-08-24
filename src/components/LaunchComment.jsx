@@ -57,7 +57,7 @@ export default function LaunchComment ({tokenAddress}) {
 
         const sendForm = async (commentData) => {
             setCommentStatus(3)
-            const response = await axios.post(`https://kek.fm/api2/postComment/${tokenAddress}`, commentData, {withCredentials: true})
+            const response = await axios.post(`https://basedpad.app/api2/postComment/${tokenAddress}`, commentData, {withCredentials: true})
             console.log("response", response)
             if(response.status == 201){ 
                 setCommentStatus(1)

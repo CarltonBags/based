@@ -239,14 +239,14 @@ export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance
                     </div>
                 </div>
                 {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status =="Exception") &&
-                    <button className="bg-base-20 font-basic text-white px-4 py-1 mt-2 rounded-xl"
+                    <button className="bg-base-20 font-basic text-sm text-white px-4 py-1 mt-2 rounded-xl"
                         type="submit"
                         >
                             Sell
                     </button>
                 }
                 {(state.status == "PendingSignature" || state.status == "Mining") &&
-                    <button className="animate-pulse bg-base-21 font-basic px-4 py-1 mt-2">
+                    <button className="animate-pulse rounded-xl text-white bg-base-21 font-basic px-4 py-1 mt-2">
                         selling...
                     </button>
                 }   

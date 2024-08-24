@@ -57,6 +57,7 @@ export default function LaunchCard ({tag, data}) {
         ))
         filtered.sort((a,b) => (b.timestamp - a.timestamp))
         const latest = filtered[0]
+
         
         
         if(latest){
@@ -76,7 +77,7 @@ export default function LaunchCard ({tag, data}) {
             setColor('#ffb2ef')
         }
 
-    },[data, tag])
+    },[])
     
 
 
@@ -93,7 +94,7 @@ export default function LaunchCard ({tag, data}) {
                     }
                 </div>
                 <div className="flex flex-col pl-2 pt-2 overflow-hidden" >
-                    <div className={`font-basic font-bold text-md`}>{data.d.name}</div>
+                    <div className={`font-basic font-bold text-md`}>{data.name}</div>
     
                     <div className="flex flex-col items-start justify-start w-[120px]">
                         <div className={`font-basic flex text-xs text-black font-bold items-center`}>
@@ -130,7 +131,7 @@ export default function LaunchCard ({tag, data}) {
                 
             </div>
         </div>
-        <div className='font-basic font-bold text-xs text-wrap truncate px-1 py-1 mx-2 h-12'>
+        <div className='font-basic font-bold text-xs text-wrap truncate px-1 mx-2 h-12'>
             {data.d.des.slice(0,205)}...
         </div>
     </div>

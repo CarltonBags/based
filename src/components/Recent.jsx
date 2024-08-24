@@ -34,10 +34,10 @@ export default function Recent () {
 
     const fetchData = async () => {
         try{
-            const getCreated = await axios.get('https://kek.fm/api2/getLastCreated',{withCredentials: true})
+            const getCreated = await axios.get('https://basedpad.app/api2/getLastCreated',{withCredentials: true})
             setCreated(getCreated.data)
     
-            const getLast = await axios.get('https://kek.fm/api2/getLast',{withCredentials: true})
+            const getLast = await axios.get('https://basedpad.app/api2/getLast',{withCredentials: true})
             const last = getLast.data
 
             const list = [...last[0].buys,...last[0].sells]
@@ -55,8 +55,8 @@ export default function Recent () {
     }
     
     useEffect(()=> {
-        const socket = io('https://kek.fm', {
-            path: '/socket.io2/',
+        const socket = io('https://basedpad.app', {
+            path: '/socket.io/',
             transports: ['websocket', 'polling'], // Allow both transports
             withCredentials: true,
         });
@@ -115,7 +115,7 @@ export default function Recent () {
                         </div>
                     }
                     {buySell && buySell.type === "sell" && 
-                        <div className="flex flex-col" onClick={handleClick}>
+                        <div className="flex flex-col wiggle font-basic font-bold text-sm" onClick={handleClick}>
                             <div className="text-base-20">
                                 Sell!
                             </div>
@@ -141,6 +141,7 @@ export default function Recent () {
                 }
             </div>
             <div>
+                <ChainSelector />
             </div>
         
         </div>

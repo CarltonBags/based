@@ -23,7 +23,7 @@ export default function LastTrade () {
 
     const fetchTradeData = async () => {
         if(event){
-            const response = await axios.get(`https://kek.fm/api/getOne/${event.tokenAddress}`, {withCredentials: true})
+            const response = await axios.get(`https://basedpad.app/api2/getOne/${event.tokenAddress}`, {withCredentials: true})
             const props = response.data[0]
             console.log("props", props)
             setName(props.name)
@@ -32,7 +32,7 @@ export default function LastTrade () {
     }
 
     useEffect(()=> {
-        const socket = io("https://kek.fm:5000")
+        const socket = io("https://basedpad.app:5001")
 
         socket.on('connect', () => {
            // console.log("connected to websocket server")

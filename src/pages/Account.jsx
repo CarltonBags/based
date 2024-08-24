@@ -19,7 +19,7 @@ export default function Account (){
 
         const fetchData = async (devAddress) => {
             try {
-                const response = await axios.get(`https://kek.fm/api/getDev/${devAddress}`)
+                const response = await axios.get(`https://basedpad.app/api2/getDev/${devAddress}`)
                 const data = response.data
                 console.log("devdata", data)
 

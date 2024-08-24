@@ -5,6 +5,7 @@ import { ethers } from "ethers"
 
 
 export default function Holders ({data}) {
+    console.log("holdersdata", data)
     return(
         <div className="flex flex-col md:items-start ">
             <div className="flex flex-col">

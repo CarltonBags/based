@@ -19,7 +19,7 @@ export default function ExplainerModal ({isOpen, handleExplainerModal}) {
               how it works
             </div>
             <div className={`font-basic font-medium text-lg pb-4 pt-2 text-start`}>
-              every token on kek.gm is a rug-proof fair launch without any team allocation or presale which has a total supply of 100k tokens.
+              every token on BasedPad is a rug-proof fair launch without any team allocation or presale which has a total supply of 100k tokens.
             </div>
             <div className="flex flex-row">
                 <div className={`font-basic font-medium text-lg pb-4 text-start`}>

@@ -39,7 +39,7 @@ export default function LaunchPage () {
     useEffect(()=>{
         const fetchData = async (tokenAddress) =>{
             try{
-                const response = await axios.get(`https://kek.fm/api2/getOne/${tokenAddress}`)
+                const response = await axios.get(`https://basedpad.app/api2/getOne/${tokenAddress}`)
                 const data = response.data[0]
                 //console.log("launch page data",data)
                 setProps(data)
@@ -53,6 +53,7 @@ export default function LaunchPage () {
 
                 //holders section
                 const transactions = [...uBuys, ...uSells]
+                console.log("transactions", transactions)
                 setTransactions(transactions)
                 transactions.sort((a,b) => b.timestamp - a.timestamp)
                 let latestTxns = {}
@@ -63,6 +64,8 @@ export default function LaunchPage () {
                     }
                 })
                 const latestTxnsArray = Object.values(latestTxns);
+                console.log("latest", latestTxnsArray)
+
                 setLatestTx(latestTxnsArray)
 
                 const last = latestTxnsArray[0]
@@ -90,7 +93,7 @@ export default function LaunchPage () {
                 const d = JSON.parse(data.description)
                 setD(d)
 
-                const uniswap = await axios.get(`https://kek.fm/api2/getOneUniswap/${tokenAddress}`)
+                const uniswap = await axios.get(`https://basedpad.app/api2/getOneUniswap/${tokenAddress}`)
                 if(uniswap.data.length > 0){
                     setTrading(false)
                 }
@@ -109,7 +112,7 @@ export default function LaunchPage () {
       
 
     useEffect(() => {
-        const socket = io('https://kek.fm', {
+        const socket = io('https://basedpad.app', {
             path: '/socket.io/',
             transports: ['websocket', 'polling'], // Allow both transports
             withCredentials: true,
