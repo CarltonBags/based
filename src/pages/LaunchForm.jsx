@@ -4,8 +4,8 @@ import { useEthers} from "@usedapp/core";
 import { Contract, ethers } from "ethers";
 import {contracts} from "../helpers/contracts"
 import {useFeeInfo, useCreateToken} from "../helpers/factoryHooks.jsx"
-import SuccessModal from "../components/SuccessModal"
-import FailModal from "../components/FailModal"
+import SuccessModal from "../components/LaunchSuccessModal"
+import FailModal from "../components/LaunchFailModal"
 import bump from "../assets/sendit.svg"
 import launch from "../assets/launch.svg"
 
