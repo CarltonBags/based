@@ -1,4 +1,4 @@
-import "../../globals.css"
+import "../../../../globals.css"
 import Chart from "./Chart"
 import { useEffect, useState } from "react"
 import TradeTable from "./TradeTable"

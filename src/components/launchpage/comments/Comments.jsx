@@ -1,4 +1,4 @@
-import "../../globals.css"
+import "../../../../globals.css"
 import { useState, useEffect } from "react"
 import moment from "moment"
 

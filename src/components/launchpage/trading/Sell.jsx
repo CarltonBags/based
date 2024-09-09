@@ -1,50 +1,42 @@
 import { useEthers, useTokenBalance } from "@usedapp/core";
 import {useState} from 'react'
-import "../../globals.css"
+import "/globals.css"
 import { ethers } from "ethers";
-import {useGetTokenAmount, useGetETHAmount, useBuyToken} from "../helpers/tokenHooks.jsx"
+import {useGetTokenAmount, useGetETHAmount, useSellToken} from "../../../helpers/tokenHooks.jsx"
 import { useEffect } from "react";
-import BuyModal from "./BuyModal"
-import change from "../assets/change2.svg"
-import { validateCall } from "@usedapp/core/dist/esm/src/helpers";
+import SellModal from "./SellModal"
+import change from "../../../assets/change2.svg"
 
 
-export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
+export default function Sell ({tokenAddress, tokenTicker, setIsBuy, tokenBalance, trading}) {
 
     const {chainId, account} = useEthers()
-    const [buyAmountETH, setBuyAmountETH] = useState(0)
-    const [parsedETH, setParsedETH] = useState("")
+    const [sellAmountToken, setSellAmountToken] = useState(0)
+    const [parsedToken, setParsedToken] = useState("0")
     const [returnBuyAmountToken, setReturnBuyAmountToken] = useState(null)
     const [slippage, setSlippage] = useState(5)
     const [buyModalOpen, setBuyModalOpen] = useState(false)
     const [errors, setErrors] = useState({})
     
-    const tokenAmount = useGetTokenAmount(chainId, tokenAddress, parsedETH)
-    const {state, send, events, resetState} = useBuyToken('buy', chainId, {transactionName: 'buy'}, tokenAddress)
+    const ETHAmount = useGetETHAmount(chainId, tokenAddress, parsedToken)
+    const {state, send, events, resetState} = useSellToken('sell', chainId, {transactionName: 'sell'}, tokenAddress)
 
     const handleBuySubmitBuy = (e) => {
         e.preventDefault()
-        if (buyAmountETH > 0){
+        if (sellAmountToken > 0){
             try{
 
                 //calc input params
                 let slipPerc
                 slippage > 0 ? slipPerc = slippage : 5
-                const formattedTokens = ethers.utils.formatEther(tokenAmount)
-                const numTokens = Number(formattedTokens)
-                const slippageTokens = (slipPerc * numTokens / 100)
-                const minTokens = numTokens - slippageTokens
-                const stringMinTokens = minTokens.toString()
-                const parsedTokens = ethers.utils.parseEther(stringMinTokens)
-
-                //calc tx value
-                const valNum = Number(buyAmountETH) + Number(buyAmountETH) * 5 / 1000
-                const stringNum = valNum.toString()
-                const txValue = ethers.utils.parseEther(stringNum)
+                const minETH = Number(ETHAmount) - (Number(ETHAmount) * slipPerc / 100)
+                const stringETH = minETH.toString()
 
                 if (validateForm()){
-                    const gasLimit = 3000000
-                    send(parsedTokens, parsedETH, {value: txValue, gasLimit: gasLimit})
+                    //console.log("stringETH", stringETH)
+                    //console.log("parsedToken", parsedToken)
+                    send(parsedToken, stringETH)
+                    
                 }
                 
             }catch(e){console.log("error buying", e)}
@@ -54,14 +46,15 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
     }
 
     const switchType = () => {
-        setIsBuy(false)
+        setIsBuy(true)
     }
 
     const validateForm = () => {
         let newErrors = {}
         if(slippage < 0){newErrors.slippageUnderflow = "min is 0%"}
         if(slippage > 90){newErrors.slippageOverflow = "max is 90%"}
-        if(Number(buyAmountETH) < 0){newErrors.ETHUnderflow = "must be at least 0.0001 ETH"}
+        if(Number(sellAmountToken) < 0){newErrors.tokenUnderflow = "must be at least 0.0001 ETH"}
+        if(Number(sellAmountToken) > Number(ethers.utils.formatEther(tokenBalance))){newErrors.tokenOverflow = "amount exceeds your balance"}
 
         setErrors(newErrors)
 
@@ -69,8 +62,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
     }
 
     useEffect(()=>{
-        //console.log("state.status", state.status)
-        if(state.status === "Success"){
+        if(state.status == "Success"){
             setBuyModalOpen(true)
         }
     },[state.status])
@@ -85,15 +77,14 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
 
     const handleChange = (e) => {
         const {value} = e.target
-        setBuyAmountETH(value)
+        setSellAmountToken(value)
         const stringValue = value.toString()
+
         if(value > 0){
             const parsed = ethers.utils.parseEther(stringValue)
-            setParsedETH(parsed)
+            setParsedToken(parsed)
+            //console.log("parsed", ethers.utils.formatEther(parsed))
         }
-
-        console.log("ETH",ethers.utils.formatEther(parsedETH))
-
 
     }
 
@@ -105,7 +96,8 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
 
     if(!trading){
         return(
-        <div className="connectbox border-4 border-black bg-gray-400 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
+        <div className="rounded-xl border-2 bg-gray-400 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
+            <SellModal className="z-10" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
             <form
                 name="buy"
                 onSubmit={handleBuySubmitBuy}
@@ -120,11 +112,8 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                         
                         
                     </div>
-                </div>
-                
+                </div>   
             </div>
-            
-            
             <div className="flex flex-col bg-base-4 border-2 border-black">
                     <div className="flex flex-col bg-white px-2 py-2">
                     <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">sell amount (${tokenTicker})</label>
@@ -161,13 +150,17 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                     </div>
                 </div>
                 {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status =="Exception") &&
-                    <button className=" border-2 border-black connectbox bg-gray-200 font-basic px-4 mt-2"
+                    <button className=" border-2 rounded-xl bg-gray-200 font-basic px-4 mt-2"
                         disabled
                         >
-                            buy
+                            sell
                     </button>
                 }
-                
+                {(state.status == "PendingSignature" || state.status == "Mining") &&
+                    <button className="animate-pulse rounded-xl bg-base-22 font-basic px-4 mt-2">
+                        selling...
+                    </button>
+                }
                
          </form>
         </div>
@@ -175,8 +168,8 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
     }
 
     return(
-        <div className="font-basic border-2 border-base-22 bg-slate-50 rounded-xl shadow-xl shadow-base-22 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4">
-            <BuyModal className="z-100" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
+        <div className="border-2 border-base-22 rounded-xl bg-slate-50 max-w-[300px] max-sm:mx-1 max-sm:mb-4 max-sm:p-1 max-sm:py-4 sm:p-4 shadow-xl shadow-base-22">
+            <SellModal className="z-10" isOpen={buyModalOpen} closeModal={handleBuyModal}/>
             <form
                 name="buy"
                 onSubmit={handleBuySubmitBuy}
@@ -184,7 +177,7 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
             <div className="flex flex-col">
                 <div className="flex flex-row justify-between pb-2 ">
                     <div className="font-basic font-semibold">
-                            buy ${tokenTicker}
+                            sell ${tokenTicker}
                     </div>
                     <div className="flex flex-row items-center">
                         <div className="flex self-start">
@@ -205,64 +198,58 @@ export default function Buy ({tokenAddress, tokenTicker, setIsBuy, trading }) {
                             {errors && errors.slippageOverflow && <span className="text-xs font-basic text-base-8">{errors.slippageOverflow}</span> }
 
                         </div>
+                        
                     </div>
                 </div>
                 
             </div>
-            
-            
-            <div className="flex flex-col bg-base-4 border-2 border-base-22 rounded-xl">
-                    <div className="flex flex-col bg-white px-2 py-2 rounded-xl">
-                    <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">buy amount (ETH)</label>
+            <div className="flex flex-col bg-base-4 ">
+                    <div className="flex flex-col bg-white px-2 py-2 border-2 border-base-22 rounded-xl">
+                    <label className="font-basic text-sm font-medium pl-1" htmlFor="buyETH">sell amount (${tokenTicker})</label>
 
-                        <div className="bg-white ">
+                        <div className="bg-slate-50">
                             <input
-                                placeholder="ETH"
+                                placeholder={"$"+`${tokenTicker}`}
                                 type="number"
                                 id="buyETH"
                                 name="buyAmount (ETH)"
                                 onChange={handleChange}
-                                value={buyAmountETH}
-                                min="0.0001"
+                                value={sellAmountToken}
+                                min="1"
                                 step="any"
                                 className="font-basic font-bold pl-1 mr-2"
                             >
-                            
                             </input>
                         </div>
-                        <div className="pt-2">
-                            {errors && errors.ETHUnderflow && <span className="text-xs font-basic font-base-8">{errors.ETHUnderflow}</span> }
-
+                        <div className="mt-0 pt-0 pb-2">
+                            {errors && errors.tokenUnderflow && <span className="text-xs font-basic text-base-8">{errors.tokenUnderflow}</span> }
+                            {errors && errors.tokenOverflow && <span className="text-xs font-basic text-base-8">{errors.tokenOverflow}</span> }
                         </div>
                         <div className="flex justify-center hover:scale-110 ease-in-out hover:cursor-pointer">
                             <img onClick={switchType} src={change} className="w-[30px]" />
                         </div>
                         <div className="flex flex-col font-basic font-medium text-sm">
-                            <div className="pl-1"
-                            >
+                            <div className="pl-1">
                                 you get 
                             </div>
-                            <div className="border-2 border-base-22 rounded-xl bg-base-22 p-2 ">
-                                {tokenAmount ? ethers.utils.formatEther(tokenAmount.toString()) + "$" + tokenTicker : "0 $" + tokenTicker}
+                            <div className=" bg-base-22 p-2 rounded-xl border-base-22">
+                                {ETHAmount ? ethers.utils.formatEther(ETHAmount.toString()) + " ETH" : "0 " + "ETH"}
                             </div>
                         </div>
                     </div>
                 </div>
-                {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status == "Exception") &&
-                    <button className="border-2 border-base-20 bg-slate-50 font-basic text-base-20 rounded-xl text-md px-4 py-1 mt-2"
+                {(state.status == "None" || state.status == "Success" || state.status == "Fail" || state.status =="Exception") &&
+                    <button className="bg-base-20 font-basic text-sm text-white px-4 py-1 mt-2 rounded-xl"
                         type="submit"
                         >
-                            Buy
+                            Sell
                     </button>
-
-
                 }
                 {(state.status == "PendingSignature" || state.status == "Mining") &&
-                    <button className="animate-pulse border-2 border-base-20 bg-base-22 rounded-xl font-basic px-4 mt-2">
-                        buying...
+                    <button className="animate-pulse rounded-xl text-white bg-base-21 font-basic px-4 py-1 mt-2">
+                        selling...
                     </button>
-                }
-               
+                }   
          </form>
         </div>
     )

@@ -1,5 +1,5 @@
-import '../../globals.css'
-import tears from "../assets/tears.svg"
+import '../../../globals.css'
+import tears from "../../assets/tears.svg"
 
 
 

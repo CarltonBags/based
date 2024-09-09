@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Hero from './components/Hero.jsx'
 import LaunchTable from './components/LaunchTable.jsx'
-import Marquee from "./components/Marquee"
-import ChainSelector from "./components/ChainSelector"
+import Marquee from "./components/nav/Marquee"
+import ChainSelector from "./components/buttons/Twitter_Telegram"
 
 
 function App() {

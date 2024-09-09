@@ -1,11 +1,12 @@
-import TelegramBtn from "./TelegramBtn"
-import TwitterBtn from "./TwitterBtn"
-import LaunchBtn from "./LaunchBtn"
-import Explainer from "./Explainer"
-import ExplainerModal from "./ExplainerModal"
+import TelegramBtn from "./buttons/TelegramBtn"
+import TwitterBtn from "./buttons/TwitterBtn"
+import LaunchBtn from "./buttons/LaunchBtn"
+import Explainer from "./buttons/Explainer"
+import ExplainerModal from "./buttons/ExplainerModal"
 import TehShit from "./TehShit"
 import Recent from "./Recent"
-import BNBFaucet from "./BNBFaucet"
+import BNBFaucet from "./buttons/BNBFaucet"
+import About from "./buttons/About"
 import { useState } from "react"
 import modulus from "../assets/buildon.svg"
 import time from "../assets/time.svg"
@@ -51,6 +52,10 @@ export default function Hero () {
                 <div className="flex justify-center">
                     <BNBFaucet />
                 </div>
+                <div className="flex justify-center">
+                    <About />
+                </div>
+                
                 {/*<div className="flex justify-center">
                     <TwitterBtn />
                 </div>*/}

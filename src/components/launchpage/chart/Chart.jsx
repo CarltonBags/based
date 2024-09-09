@@ -1,4 +1,4 @@
-import "../../globals.css"
+import "../../../../globals.css"
 import { useEffect, useState, useRef } from "react";
 import { ethers } from "ethers";
 import { createChart } from "lightweight-charts";

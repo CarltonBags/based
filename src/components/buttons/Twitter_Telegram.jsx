@@ -1,8 +1,7 @@
-import bnb from "../assets/2.png"
-import mods from "../assets/3.png"
-import modssoon from "../assets/MODULUS.svg"
-import basesoon from "../assets/BASE.svg"
-import "../../globals.css"
+import bnb from "../../assets/2.png"
+import mods from "../../assets/3.png"
+
+import "../../../globals.css"
 
 
 

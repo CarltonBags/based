@@ -1,12 +1,12 @@
-import '../../globals.css';
+import '../../../globals.css';
 import { Connect } from "./Connect";
 import { NavAccount } from "./NavAccount";
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import burger from "../assets/burgermenu.svg";
-import logo from "../assets/BasedPad.svg";
+import burger from "../../assets/burgermenu.svg";
+import logo from "../../assets/BasedPad.svg";
 import { useEthers } from '@usedapp/core';
-import Recent from './Recent';
+import Recent from '../Recent';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);

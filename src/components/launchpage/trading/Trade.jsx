@@ -1,7 +1,7 @@
 import Buy from "./Buy";
 import Sell from "./Sell";
 import { useState } from "react";
-import "../../globals.css"
+import "/globals.css"
 
 
 

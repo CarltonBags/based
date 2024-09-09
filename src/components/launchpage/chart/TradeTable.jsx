@@ -1,4 +1,4 @@
-import "../../globals.css"
+import "../../../../globals.css"
 import { useEffect, useState } from "react"
 import moment from "moment/moment"
 import { ethers } from "ethers"

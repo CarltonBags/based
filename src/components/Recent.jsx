@@ -8,7 +8,7 @@ import axios from "axios"
 import "../../globals.css"
 import { ethers } from "ethers"
 import { useNavigate } from "react-router-dom"
-import ChainSelector from "./ChainSelector"
+import ChainSelector from "./buttons/Twitter_Telegram"
 
 
 export default function Recent () {
